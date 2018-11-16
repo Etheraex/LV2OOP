@@ -14,6 +14,8 @@ namespace LabV2OOP
         bool ValuesSet();
     }
 
+    #region Temperature
+
     class TemperatureValidator : IValidate
     {
         private double _minTemp;
@@ -63,6 +65,10 @@ namespace LabV2OOP
 
     }
 
+    #endregion
+
+    #region Pressure
+
     class PressureValidator : IValidate
     {
         private double _minPress;
@@ -111,6 +117,10 @@ namespace LabV2OOP
         }
     }
 
+    #endregion
+
+    #region Humidity
+
     class HumidityValidator : IValidate
     {
         private double _minHumid;
@@ -157,4 +167,7 @@ namespace LabV2OOP
         }
 
     }
+
+    #endregion
+
 }

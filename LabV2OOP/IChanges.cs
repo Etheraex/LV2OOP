@@ -8,6 +8,6 @@ namespace LabV2OOP
 {
     interface IChanges
     {
-        void AcceptChanges(String temp, String pressure, String moisture);
+        void AcceptChanges(String temp, String pressure, String humidity);
     }
 }

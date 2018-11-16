@@ -17,9 +17,19 @@ namespace LabV2OOP
             InitializeComponent();
         }
 
-        private void mmFormGenerator_Click(object sender, EventArgs e)
+        public void SendChanges(String temp,String pressure, String humidity)
         {
-            FormGenerator fm = new FormGenerator();
+            foreach (Form f in MdiChildren)
+            {
+                IChanges upd = f as IChanges;
+                if (upd != null)
+                    upd.AcceptChanges(temp,pressure,humidity);
+            }
+        }
+
+    private void mmFormGenerator_Click(object sender, EventArgs e)
+        {
+            FormGenerator fm = new FormGenerator(this);
             fm.MdiParent = this;
             fm.Show();
         }

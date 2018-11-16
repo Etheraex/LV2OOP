@@ -31,16 +31,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtBoxTemp = new System.Windows.Forms.TextBox();
+            this.txtBoxPressure = new System.Windows.Forms.TextBox();
+            this.txtBoxHumidity = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnProsledi = new System.Windows.Forms.Button();
+            this.btnHumidity = new System.Windows.Forms.Button();
+            this.btnPressure = new System.Windows.Forms.Button();
+            this.btnTemperature = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -75,26 +75,26 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Vlaznost";
             // 
-            // textBox1
+            // txtBoxTemp
             // 
-            this.textBox1.Location = new System.Drawing.Point(137, 33);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(135, 20);
-            this.textBox1.TabIndex = 5;
+            this.txtBoxTemp.Location = new System.Drawing.Point(137, 33);
+            this.txtBoxTemp.Name = "txtBoxTemp";
+            this.txtBoxTemp.Size = new System.Drawing.Size(135, 20);
+            this.txtBoxTemp.TabIndex = 5;
             // 
-            // textBox2
+            // txtBoxPressure
             // 
-            this.textBox2.Location = new System.Drawing.Point(137, 73);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(135, 20);
-            this.textBox2.TabIndex = 6;
+            this.txtBoxPressure.Location = new System.Drawing.Point(137, 73);
+            this.txtBoxPressure.Name = "txtBoxPressure";
+            this.txtBoxPressure.Size = new System.Drawing.Size(135, 20);
+            this.txtBoxPressure.TabIndex = 6;
             // 
-            // textBox3
+            // txtBoxHumidity
             // 
-            this.textBox3.Location = new System.Drawing.Point(137, 113);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(135, 20);
-            this.textBox3.TabIndex = 7;
+            this.txtBoxHumidity.Location = new System.Drawing.Point(137, 113);
+            this.txtBoxHumidity.Name = "txtBoxHumidity";
+            this.txtBoxHumidity.Size = new System.Drawing.Size(135, 20);
+            this.txtBoxHumidity.TabIndex = 7;
             // 
             // textBox4
             // 
@@ -123,41 +123,45 @@
             this.checkBox2.Text = "Automatsko generisanje podataka. Interval u sekundama";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnProsledi
             // 
-            this.button1.Location = new System.Drawing.Point(170, 139);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 39);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnProsledi.Location = new System.Drawing.Point(170, 139);
+            this.btnProsledi.Name = "btnProsledi";
+            this.btnProsledi.Size = new System.Drawing.Size(103, 39);
+            this.btnProsledi.TabIndex = 11;
+            this.btnProsledi.Text = "Prosledi";
+            this.btnProsledi.UseVisualStyleBackColor = true;
+            this.btnProsledi.Click += new System.EventHandler(this.btnProsledi_Click);
             // 
-            // button2
+            // btnHumidity
             // 
-            this.button2.Location = new System.Drawing.Point(279, 111);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(32, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "*";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnHumidity.Location = new System.Drawing.Point(279, 111);
+            this.btnHumidity.Name = "btnHumidity";
+            this.btnHumidity.Size = new System.Drawing.Size(32, 23);
+            this.btnHumidity.TabIndex = 12;
+            this.btnHumidity.Text = "*";
+            this.btnHumidity.UseVisualStyleBackColor = true;
+            this.btnHumidity.Click += new System.EventHandler(this.btnHumidity_Click);
             // 
-            // button3
+            // btnPressure
             // 
-            this.button3.Location = new System.Drawing.Point(279, 71);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(32, 23);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "*";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnPressure.Location = new System.Drawing.Point(279, 71);
+            this.btnPressure.Name = "btnPressure";
+            this.btnPressure.Size = new System.Drawing.Size(32, 23);
+            this.btnPressure.TabIndex = 13;
+            this.btnPressure.Text = "*";
+            this.btnPressure.UseVisualStyleBackColor = true;
+            this.btnPressure.Click += new System.EventHandler(this.btnPressure_Click);
             // 
-            // button4
+            // btnTemperature
             // 
-            this.button4.Location = new System.Drawing.Point(279, 31);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(32, 23);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "*";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnTemperature.Location = new System.Drawing.Point(279, 31);
+            this.btnTemperature.Name = "btnTemperature";
+            this.btnTemperature.Size = new System.Drawing.Size(32, 23);
+            this.btnTemperature.TabIndex = 14;
+            this.btnTemperature.Text = "*";
+            this.btnTemperature.UseVisualStyleBackColor = true;
+            this.btnTemperature.Click += new System.EventHandler(this.btnTemperature_Click);
             // 
             // FormGenerator
             // 
@@ -165,16 +169,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(384, 236);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnTemperature);
+            this.Controls.Add(this.btnPressure);
+            this.Controls.Add(this.btnHumidity);
+            this.Controls.Add(this.btnProsledi);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtBoxHumidity);
+            this.Controls.Add(this.txtBoxPressure);
+            this.Controls.Add(this.txtBoxTemp);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -194,15 +198,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtBoxTemp;
+        private System.Windows.Forms.TextBox txtBoxPressure;
+        private System.Windows.Forms.TextBox txtBoxHumidity;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnProsledi;
+        private System.Windows.Forms.Button btnHumidity;
+        private System.Windows.Forms.Button btnPressure;
+        private System.Windows.Forms.Button btnTemperature;
     }
 }

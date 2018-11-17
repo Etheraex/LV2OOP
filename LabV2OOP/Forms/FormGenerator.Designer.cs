@@ -35,14 +35,15 @@
             this.txtBoxTemp = new System.Windows.Forms.TextBox();
             this.txtBoxPressure = new System.Windows.Forms.TextBox();
             this.txtBoxHumidity = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtBoxInterval = new System.Windows.Forms.TextBox();
             this.chkBoxGranice = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.chkBoxAutomatic = new System.Windows.Forms.CheckBox();
             this.btnProsledi = new System.Windows.Forms.Button();
             this.btnHumidity = new System.Windows.Forms.Button();
             this.btnPressure = new System.Windows.Forms.Button();
             this.btnTemperature = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,12 +100,13 @@
             this.txtBoxHumidity.Size = new System.Drawing.Size(135, 20);
             this.txtBoxHumidity.TabIndex = 7;
             // 
-            // textBox4
+            // txtBoxInterval
             // 
-            this.textBox4.Location = new System.Drawing.Point(329, 209);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(38, 20);
-            this.textBox4.TabIndex = 8;
+            this.txtBoxInterval.Location = new System.Drawing.Point(317, 209);
+            this.txtBoxInterval.Name = "txtBoxInterval";
+            this.txtBoxInterval.Size = new System.Drawing.Size(38, 20);
+            this.txtBoxInterval.TabIndex = 8;
+            this.txtBoxInterval.TextChanged += new System.EventHandler(this.txtBoxInterval_TextChanged);
             // 
             // chkBoxGranice
             // 
@@ -116,15 +118,16 @@
             this.chkBoxGranice.Text = "Ignorisi granice";
             this.chkBoxGranice.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // chkBoxAutomatic
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(16, 211);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(295, 17);
-            this.checkBox2.TabIndex = 10;
-            this.checkBox2.Text = "Automatsko generisanje podataka. Interval u sekundama";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chkBoxAutomatic.AutoSize = true;
+            this.chkBoxAutomatic.Location = new System.Drawing.Point(16, 211);
+            this.chkBoxAutomatic.Name = "chkBoxAutomatic";
+            this.chkBoxAutomatic.Size = new System.Drawing.Size(295, 17);
+            this.chkBoxAutomatic.TabIndex = 10;
+            this.chkBoxAutomatic.Text = "Automatsko generisanje podataka. Interval u sekundama";
+            this.chkBoxAutomatic.UseVisualStyleBackColor = true;
+            this.chkBoxAutomatic.CheckedChanged += new System.EventHandler(this.chkBoxAutomatic_CheckedChanged);
             // 
             // btnProsledi
             // 
@@ -171,6 +174,10 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // FormGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -181,9 +188,9 @@
             this.Controls.Add(this.btnPressure);
             this.Controls.Add(this.btnHumidity);
             this.Controls.Add(this.btnProsledi);
-            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.chkBoxAutomatic);
             this.Controls.Add(this.chkBoxGranice);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txtBoxInterval);
             this.Controls.Add(this.txtBoxHumidity);
             this.Controls.Add(this.txtBoxPressure);
             this.Controls.Add(this.txtBoxTemp);
@@ -210,13 +217,14 @@
         private System.Windows.Forms.TextBox txtBoxTemp;
         private System.Windows.Forms.TextBox txtBoxPressure;
         private System.Windows.Forms.TextBox txtBoxHumidity;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtBoxInterval;
         private System.Windows.Forms.CheckBox chkBoxGranice;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox chkBoxAutomatic;
         private System.Windows.Forms.Button btnProsledi;
         private System.Windows.Forms.Button btnHumidity;
         private System.Windows.Forms.Button btnPressure;
         private System.Windows.Forms.Button btnTemperature;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Timer timer;
     }
 }

@@ -25,31 +25,12 @@ namespace LabV2OOP
                 txtBoxPressure.Enabled = false;
             if (!HumidityValidator.HumidityInstance.ValuesSet())
                 txtBoxHumidity.Enabled = false;
+            txtBoxInterval.Enabled = false;
         }
 
         #endregion
 
-        private void btnProsledi_Click(object sender, EventArgs e)
-        {
-            bool chkBox = chkBoxGranice.Checked;
-            if (ValidateTemperature())
-            {
-                if (txtBoxTemp.Text != "" && ( chkBox || TemperatureValidator.TemperatureInstance.Validate(double.Parse(txtBoxTemp.Text))))
-                    LocalParent.SendTemperatureChange(double.Parse(txtBoxTemp.Text));
-            }
-
-            if (ValidatePressure())
-            {
-                if (txtBoxPressure.Text != "" && (chkBox || PressureValidator.PressureInstance.Validate(double.Parse(txtBoxPressure.Text))))
-                    LocalParent.SendPressureChange(double.Parse(txtBoxPressure.Text));
-            }
-
-            if (ValidateHumidity())
-            {
-                if (txtBoxHumidity.Text != "" && (chkBox || HumidityValidator.HumidityInstance.Validate(double.Parse(txtBoxHumidity.Text))))
-                    LocalParent.SendHumidityChange(double.Parse(txtBoxHumidity.Text));
-            }
-        }
+        #region OtherFormsInit
 
         private DialogResult CreateStandardValueForm(IValidate val, String text)
         {
@@ -76,6 +57,35 @@ namespace LabV2OOP
             DialogResult dr = CreateStandardValueForm(HumidityValidator.HumidityInstance, "Standardne vrednosti vlaznosti");
             if (dr == DialogResult.OK)
                 txtBoxHumidity.Enabled = true;
+        }
+
+        #endregion
+
+        private void btnProsledi_Click(object sender, EventArgs e)
+        {
+            Prosledi();
+        }
+
+        private void Prosledi()
+        {
+            bool chkBox = chkBoxGranice.Checked;
+            if (ValidateTemperature())
+            {
+                if (txtBoxTemp.Text != "" && (chkBox || TemperatureValidator.TemperatureInstance.Validate(double.Parse(txtBoxTemp.Text))))
+                    LocalParent.SendTemperatureChange(double.Parse(txtBoxTemp.Text));
+            }
+
+            if (ValidatePressure())
+            {
+                if (txtBoxPressure.Text != "" && (chkBox || PressureValidator.PressureInstance.Validate(double.Parse(txtBoxPressure.Text))))
+                    LocalParent.SendPressureChange(double.Parse(txtBoxPressure.Text));
+            }
+
+            if (ValidateHumidity())
+            {
+                if (txtBoxHumidity.Text != "" && (chkBox || HumidityValidator.HumidityInstance.Validate(double.Parse(txtBoxHumidity.Text))))
+                    LocalParent.SendHumidityChange(double.Parse(txtBoxHumidity.Text));
+            }
         }
 
         public MainForm LocalParent { get; set; }
@@ -142,6 +152,63 @@ namespace LabV2OOP
             }
         }
 
+        private bool ValidateInterval()
+        {
+            int interval;
+            if(!int.TryParse(txtBoxInterval.Text,out interval))
+            {
+                errorProvider.SetError(txtBoxInterval, "Vreme u sekundama 1-9");
+                return false;
+            }
+            else if(interval < 1 || interval > 9)
+            {
+                errorProvider.SetError(txtBoxInterval, "Samo izmedju 1-9");
+                return false;
+            }
+            else
+            {
+                errorProvider.SetError(txtBoxInterval, null);
+                return true;
+            }
+        }
+
         #endregion
+
+        private void chkBoxAutomatic_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxAutomatic.Checked)
+            {
+                btnProsledi.Enabled = false;
+                txtBoxInterval.Enabled = true;
+            }
+            else
+            {
+                timer.Stop();
+                btnProsledi.Enabled = true;
+                txtBoxInterval.Text = "";
+                txtBoxInterval.Enabled = false;
+            }
+        }
+
+        private void timerInit(int x)
+        {
+            timer = new Timer();
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Interval = x * 1000;
+        }
+
+        private void txtBoxInterval_TextChanged(object sender, EventArgs e)
+        {
+            if (chkBoxAutomatic.Checked && ValidateInterval())
+            {
+                timerInit(int.Parse(txtBoxInterval.Text));
+                timer.Start();
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            Prosledi();
+        }
     }
 }

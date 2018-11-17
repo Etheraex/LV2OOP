@@ -36,7 +36,7 @@
             this.txtBoxPressure = new System.Windows.Forms.TextBox();
             this.txtBoxHumidity = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkBoxGranice = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.btnProsledi = new System.Windows.Forms.Button();
             this.btnHumidity = new System.Windows.Forms.Button();
@@ -84,7 +84,6 @@
             this.txtBoxTemp.Name = "txtBoxTemp";
             this.txtBoxTemp.Size = new System.Drawing.Size(135, 20);
             this.txtBoxTemp.TabIndex = 5;
-            this.txtBoxTemp.Validating += new System.ComponentModel.CancelEventHandler(this.txtBoxTemp_Validating);
             // 
             // txtBoxPressure
             // 
@@ -92,7 +91,6 @@
             this.txtBoxPressure.Name = "txtBoxPressure";
             this.txtBoxPressure.Size = new System.Drawing.Size(135, 20);
             this.txtBoxPressure.TabIndex = 6;
-            this.txtBoxPressure.Validating += new System.ComponentModel.CancelEventHandler(this.txtBoxPressure_Validating);
             // 
             // txtBoxHumidity
             // 
@@ -100,7 +98,6 @@
             this.txtBoxHumidity.Name = "txtBoxHumidity";
             this.txtBoxHumidity.Size = new System.Drawing.Size(135, 20);
             this.txtBoxHumidity.TabIndex = 7;
-            this.txtBoxHumidity.Validating += new System.ComponentModel.CancelEventHandler(this.txtBoxHumidity_Validating);
             // 
             // textBox4
             // 
@@ -109,15 +106,15 @@
             this.textBox4.Size = new System.Drawing.Size(38, 20);
             this.textBox4.TabIndex = 8;
             // 
-            // checkBox1
+            // chkBoxGranice
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 188);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(97, 17);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Ignorisi granice";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkBoxGranice.AutoSize = true;
+            this.chkBoxGranice.Location = new System.Drawing.Point(16, 188);
+            this.chkBoxGranice.Name = "chkBoxGranice";
+            this.chkBoxGranice.Size = new System.Drawing.Size(97, 17);
+            this.chkBoxGranice.TabIndex = 9;
+            this.chkBoxGranice.Text = "Ignorisi granice";
+            this.chkBoxGranice.UseVisualStyleBackColor = true;
             // 
             // checkBox2
             // 
@@ -185,7 +182,7 @@
             this.Controls.Add(this.btnHumidity);
             this.Controls.Add(this.btnProsledi);
             this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.chkBoxGranice);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.txtBoxHumidity);
             this.Controls.Add(this.txtBoxPressure);
@@ -214,7 +211,7 @@
         private System.Windows.Forms.TextBox txtBoxPressure;
         private System.Windows.Forms.TextBox txtBoxHumidity;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkBoxGranice;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button btnProsledi;
         private System.Windows.Forms.Button btnHumidity;

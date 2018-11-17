@@ -17,17 +17,47 @@ namespace LabV2OOP
             InitializeComponent();
         }
 
-        public void SendChanges(String temp,String pressure, String humidity)
+        #region Changes
+
+        public void SendTemperatureChange(double par)
         {
             foreach (Form f in MdiChildren)
             {
-                IChanges upd = f as IChanges;
+                IUpdate upd = f as IUpdate;
                 if (upd != null)
-                    upd.AcceptChanges(temp,pressure,humidity);
+                {
+                    upd.UpdateTemperature(par);
+                }
             }
         }
 
-    private void mmFormGenerator_Click(object sender, EventArgs e)
+        public void SendPressureChange(double par)
+        {
+            foreach (Form f in MdiChildren)
+            {
+                IUpdate upd = f as IUpdate;
+                if (upd != null)
+                {
+                    upd.UpdatePressure(par);
+                }
+            }
+        }
+
+        public void SendHumidityChange(double par)
+        {
+            foreach (Form f in MdiChildren)
+            {
+                IUpdate upd = f as IUpdate;
+                if (upd != null)
+                {
+                    upd.UpdateHumidity(par);
+                }
+            }
+        }
+
+        #endregion
+
+        private void mmFormGenerator_Click(object sender, EventArgs e)
         {
             FormGenerator fm = new FormGenerator(this);
             fm.MdiParent = this;

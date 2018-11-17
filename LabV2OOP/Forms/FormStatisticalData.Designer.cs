@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtBoxMoist = new System.Windows.Forms.TextBox();
             this.txtBoxPress = new System.Windows.Forms.TextBox();
             this.txtBoxTemp = new System.Windows.Forms.TextBox();
@@ -40,9 +41,11 @@
             this.lblTemp = new System.Windows.Forms.Label();
             this.lblPres = new System.Windows.Forms.Label();
             this.lblHumid = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.lblVrednost = new System.Windows.Forms.Label();
+            this.chkBoxStats = new System.Windows.Forms.CheckBox();
+            this.txtBoxStats = new System.Windows.Forms.TextBox();
+            this.errorStats = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorStats)).BeginInit();
             this.SuspendLayout();
             // 
             // txtBoxMoist
@@ -155,31 +158,38 @@
             this.lblHumid.TabIndex = 19;
             this.lblHumid.Text = "label9";
             // 
-            // label10
+            // lblVrednost
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(236, 158);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 13);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "vrednosti";
+            this.lblVrednost.AutoSize = true;
+            this.lblVrednost.Location = new System.Drawing.Point(236, 158);
+            this.lblVrednost.Name = "lblVrednost";
+            this.lblVrednost.Size = new System.Drawing.Size(50, 13);
+            this.lblVrednost.TabIndex = 19;
+            this.lblVrednost.Text = "vrednosti";
             // 
-            // checkBox1
+            // chkBoxStats
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 157);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(165, 17);
-            this.checkBox1.TabIndex = 20;
-            this.checkBox1.Text = "Uradi statistiku za poslednjih: ";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkBoxStats.AutoSize = true;
+            this.chkBoxStats.Location = new System.Drawing.Point(15, 157);
+            this.chkBoxStats.Name = "chkBoxStats";
+            this.chkBoxStats.Size = new System.Drawing.Size(165, 17);
+            this.chkBoxStats.TabIndex = 20;
+            this.chkBoxStats.Text = "Uradi statistiku za poslednjih: ";
+            this.chkBoxStats.UseVisualStyleBackColor = true;
+            this.chkBoxStats.CheckedChanged += new System.EventHandler(this.chkBoxStats_CheckedChanged);
             // 
-            // textBox4
+            // txtBoxStats
             // 
-            this.textBox4.Location = new System.Drawing.Point(186, 155);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(44, 20);
-            this.textBox4.TabIndex = 13;
+            this.txtBoxStats.Location = new System.Drawing.Point(186, 155);
+            this.txtBoxStats.Name = "txtBoxStats";
+            this.txtBoxStats.Size = new System.Drawing.Size(44, 20);
+            this.txtBoxStats.TabIndex = 13;
+            this.txtBoxStats.TextChanged += new System.EventHandler(this.txtBoxStats_TextChanged);
+            // 
+            // errorStats
+            // 
+            this.errorStats.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorStats.ContainerControl = this;
             // 
             // FormStatisticalData
             // 
@@ -187,15 +197,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(718, 183);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.chkBoxStats);
+            this.Controls.Add(this.lblVrednost);
             this.Controls.Add(this.lblHumid);
             this.Controls.Add(this.lblPres);
             this.Controls.Add(this.lblTemp);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txtBoxStats);
             this.Controls.Add(this.txtBoxMoist);
             this.Controls.Add(this.txtBoxPress);
             this.Controls.Add(this.txtBoxTemp);
@@ -208,6 +218,7 @@
             this.MinimumSize = new System.Drawing.Size(734, 221);
             this.Name = "FormStatisticalData";
             this.Text = "FormStatisticalData";
+            ((System.ComponentModel.ISupportInitialize)(this.errorStats)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,8 +238,9 @@
         private System.Windows.Forms.Label lblTemp;
         private System.Windows.Forms.Label lblPres;
         private System.Windows.Forms.Label lblHumid;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label lblVrednost;
+        private System.Windows.Forms.CheckBox chkBoxStats;
+        private System.Windows.Forms.TextBox txtBoxStats;
+        private System.Windows.Forms.ErrorProvider errorStats;
     }
 }

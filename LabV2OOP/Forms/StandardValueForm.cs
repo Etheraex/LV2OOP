@@ -73,5 +73,9 @@ namespace LabV2OOP
 
         #endregion
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

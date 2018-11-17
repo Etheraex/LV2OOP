@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace LabV2OOP
 {
-    public partial class FormStatisticalData : Form, IChanges
+    public partial class FormStatisticalData : Form, IUpdate
     {
 
         List<double> acceptedTemp = new List<double>();
@@ -20,17 +20,8 @@ namespace LabV2OOP
         public FormStatisticalData()
         {
             InitializeComponent();
-        }
-
-        public void AcceptChanges(string temp, string pressure, string moisture)
-        {
-            txtBoxTemp.Text = temp;
-            txtBoxPress.Text = pressure;
-            txtBoxMoist.Text = moisture;
-            acceptedTemp.Add(double.Parse(temp));
-            acceptedPres.Add(double.Parse(pressure));
-            acceptedHumid.Add(double.Parse(moisture));
-            RefreshLabels();
+            chkBoxStats.Checked = false;
+            txtBoxStats.Enabled = false;
         }
 
         private void RefreshLabels()
@@ -46,10 +37,78 @@ namespace LabV2OOP
 
         private double CalculateAverage(List<double> values)
         {
+            int i = 0;
+            int divisor = values.Count;
+            if (chkBoxStats.Checked && values.Count > int.Parse(txtBoxStats.Text))
+            {
+                i = values.Count - int.Parse(txtBoxStats.Text);
+                divisor = int.Parse(txtBoxStats.Text);
+            }
+
             double sum = 0;
-            foreach (double val in values)
-                sum += val;
-            return sum / values.Count();
+
+            for(; i<values.Count; i++)
+                sum += values[i];
+            return sum / divisor;
+        }
+
+        public void UpdateTemperature(double temp)
+        {
+            if (TemperatureValidator.TemperatureInstance.Validate(temp))
+            {
+                txtBoxTemp.Text = temp.ToString();
+                acceptedTemp.Add(temp);
+                RefreshLabels();
+            }
+        }
+
+        public void UpdatePressure(double press)
+        {
+            if (PressureValidator.PressureInstance.Validate(press))
+            {
+                txtBoxPress.Text = press.ToString();
+                acceptedPres.Add(press);
+                RefreshLabels();
+            }
+        }
+
+        public void UpdateHumidity(double humid)
+        {
+            if (HumidityValidator.HumidityInstance.Validate(humid))
+            {
+                txtBoxMoist.Text = humid.ToString();
+                acceptedHumid.Add(humid);
+                RefreshLabels();
+            }
+        }
+
+        private void txtBoxStats_TextChanged(object sender, EventArgs e)
+        {
+            if(ValidateStatCount())
+                RefreshLabels();   
+        }
+
+        private void chkBoxStats_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBoxStats.Checked == false)
+                RefreshLabels();
+            else
+                txtBoxStats.Enabled = true;
+        }
+
+        private bool ValidateStatCount()
+        {
+            int tmp;
+            if (!int.TryParse(txtBoxStats.Text, out tmp))
+            {
+                errorStats.SetError(lblVrednost, "Unesite celobrojnu vrednost");
+                return false;
+            }
+            else
+            {
+                errorStats.SetError(lblVrednost, null);
+                return true;
+            }
         }
 
     }

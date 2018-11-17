@@ -25,16 +25,29 @@ namespace LabV2OOP
                 txtBoxPressure.Enabled = false;
             if (!HumidityValidator.HumidityInstance.ValuesSet())
                 txtBoxHumidity.Enabled = false;
-
         }
 
         #endregion
 
         private void btnProsledi_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren(ValidationConstraints.Enabled))
+            bool chkBox = chkBoxGranice.Checked;
+            if (ValidateTemperature())
             {
-                LocalParent.SendChanges(txtBoxTemp.Text, txtBoxPressure.Text, txtBoxHumidity.Text);
+                if (txtBoxTemp.Text != "" && ( chkBox || TemperatureValidator.TemperatureInstance.Validate(double.Parse(txtBoxTemp.Text))))
+                    LocalParent.SendTemperatureChange(double.Parse(txtBoxTemp.Text));
+            }
+
+            if (ValidatePressure())
+            {
+                if (txtBoxPressure.Text != "" && (chkBox || PressureValidator.PressureInstance.Validate(double.Parse(txtBoxPressure.Text))))
+                    LocalParent.SendPressureChange(double.Parse(txtBoxPressure.Text));
+            }
+
+            if (ValidateHumidity())
+            {
+                if (txtBoxHumidity.Text != "" && (chkBox || HumidityValidator.HumidityInstance.Validate(double.Parse(txtBoxHumidity.Text))))
+                    LocalParent.SendHumidityChange(double.Parse(txtBoxHumidity.Text));
             }
         }
 
@@ -69,64 +82,63 @@ namespace LabV2OOP
 
         #region Errorproviders
 
-        private void txtBoxTemp_Validating(object sender, CancelEventArgs e)
-        {
-            double tmp;
-            if (String.IsNullOrEmpty(txtBoxTemp.Text))
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtBoxTemp, "Unesite temperaturu");
-            }
-            else if(!double.TryParse(txtBoxTemp.Text, out tmp))
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtBoxTemp, "Unesite temperaturu pravilno");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(txtBoxTemp, null);
-            }
-
-        }
-
-        private void txtBoxPressure_Validating(object sender, CancelEventArgs e)
-        {
-            double tmp;
-            if (String.IsNullOrEmpty(txtBoxPressure.Text))
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtBoxPressure, "Unesite pritisak");
-            }
-            else if (!double.TryParse(txtBoxPressure.Text, out tmp))
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtBoxPressure, "Unesite pritisak pravilno");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(txtBoxPressure, null);
-            }
-        }
-
-        private void txtBoxHumidity_Validating(object sender, CancelEventArgs e)
+        public bool ValidateHumidity()
         {
             double tmp;
             if (String.IsNullOrEmpty(txtBoxHumidity.Text))
             {
-                e.Cancel = true;
                 errorProvider.SetError(txtBoxHumidity, "Unesite vlaznost");
+                return false;
             }
             else if (!double.TryParse(txtBoxHumidity.Text, out tmp))
             {
-                e.Cancel = true;
                 errorProvider.SetError(txtBoxHumidity, "Unesite vlaznost pravilno");
+                return false;
             }
             else
             {
-                e.Cancel = false;
                 errorProvider.SetError(txtBoxHumidity, null);
+                return true;
+            }
+        }
+
+        public bool ValidatePressure()
+        {
+            double tmp;
+            if (String.IsNullOrEmpty(txtBoxPressure.Text))
+            {
+                errorProvider.SetError(txtBoxPressure, "Unesite Pressure");
+                return false;
+            }
+            else if (!double.TryParse(txtBoxPressure.Text, out tmp))
+            {
+                errorProvider.SetError(txtBoxPressure, "Unesite Pressure pravilno");
+                return false;
+            }
+            else
+            {
+                errorProvider.SetError(txtBoxPressure, null);
+                return true;
+            }
+        }
+
+        public bool ValidateTemperature()
+        {
+            double tmp;
+            if (String.IsNullOrEmpty(txtBoxTemp.Text))
+            {
+                errorProvider.SetError(txtBoxTemp, "Unesite Temperature");
+                return false;
+            }
+            else if (!double.TryParse(txtBoxTemp.Text, out tmp))
+            {
+                errorProvider.SetError(txtBoxTemp, "Unesite Temperature pravilno");
+                return false;
+            }
+            else
+            {
+                errorProvider.SetError(txtBoxTemp, null);
+                return true;
             }
         }
 

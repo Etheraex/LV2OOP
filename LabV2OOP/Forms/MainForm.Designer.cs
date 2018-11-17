@@ -95,12 +95,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mmFormGenerator;
         private System.Windows.Forms.ToolStripMenuItem mmFormChart;
         private System.Windows.Forms.ToolStripMenuItem mmFormStatisticalData;
+        private System.Windows.Forms.MenuStrip mainMenu;
     }
 }
 

@@ -19,6 +19,16 @@ namespace LabV2OOP
 
         #region Changes
 
+        public void UpdateStandardValues()
+        {
+            foreach(Form f in MdiChildren)
+            {
+                IUpdate upd = f as IUpdate;
+                if (upd != null)
+                    upd.UpdateStandardValues();
+            }
+        }
+
         public void SendTemperatureChange(double par)
         {
             foreach (Form f in MdiChildren)
@@ -75,7 +85,39 @@ namespace LabV2OOP
         {
             FormStatisticalData fsd = new FormStatisticalData();
             fsd.MdiParent = this;
+            fsd.UpdateStandardValues();
             fsd.Show();
         }
+
+        public void EnablePressureTextBoxes()
+        {
+            foreach(Form f in MdiChildren)
+            {
+                FormGenerator fg = f as FormGenerator;
+                if(fg != null)
+                    fg.EnableTextBoxPressure();
+            }
+        }
+
+        public void EnableTemperatureTextBoxes()
+        {
+            foreach (Form f in MdiChildren)
+            {
+                FormGenerator fg = f as FormGenerator;
+                if(fg != null)
+                    fg.EnableTextBoxTemperature();
+            }
+        }
+
+        public void EnableHumidityTextBoxes()
+        {
+            foreach (Form f in MdiChildren)
+            {
+                FormGenerator fg = f as FormGenerator;
+                if(fg != null)
+                    fg.EnableTextBoxHumidity();
+            }
+        } 
+
     }
 }

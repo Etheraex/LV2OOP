@@ -12,28 +12,27 @@ namespace LabV2OOP
 {
     public partial class StandardValueForm : Form
     {
-        public StandardValueForm(IValidate val, String text)
+        public StandardValueForm(ICheckStandard val, String text)
         {
             InitializeComponent();
-            Validator = val;
+            Checker = val;
             this.Text = text;
             double min;
             double max;
-            Validator.GetValues(out min, out max);
+            Checker.GetValues(out min, out max);
             txtBoxMin.Text = min.ToString();
             txtBoxMax.Text = max.ToString();
         }
 
-        public IValidate Validator { get; set; }
+        public ICheckStandard Checker { get; set; }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren(ValidationConstraints.Enabled))
+            if (ValidateMin() && ValidateMax())
             {
                 double x = double.Parse(txtBoxMin.Text);
                 double y = double.Parse(txtBoxMax.Text);
-
-                Validator.SetValues(x, y);
+                Checker.SetValues(x, y);
                 DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -41,33 +40,38 @@ namespace LabV2OOP
 
         #region Errorprovider
 
-        private void txtBoxMin_Validating(object sender, CancelEventArgs e)
+        private bool ValidateMin()
         {
             double tmp;
             if(!double.TryParse(txtBoxMin.Text,out tmp))
             {
-                e.Cancel = true;
-                errorProvider.SetError(txtBoxMin, "Unesite minimalnu vrednost pravilno");
+                errorStandardValue.SetError(txtBoxMin,"Lepo unesite min vrednost");
+                return false;
             }
             else
             {
-                e.Cancel = false;
-                errorProvider.SetError(txtBoxMin, null);
+                errorStandardValue.SetError(txtBoxMin, null);
+                return true;
             }
         }
 
-        private void txtBoxMax_Validating(object sender, CancelEventArgs e)
+        private bool ValidateMax()
         {
             double tmp;
             if (!double.TryParse(txtBoxMax.Text, out tmp))
             {
-                e.Cancel = true;
-                errorProvider.SetError(txtBoxMax, "Unesite maximalnu vrednost pravilno");
+                errorStandardValue.SetError(txtBoxMax, "Lepo unesite max vrednost");
+                return false;
+            }
+            else if (double.Parse(txtBoxMin.Text) > double.Parse(txtBoxMax.Text))
+            {
+                errorStandardValue.SetError(txtBoxMax, "Max mora biti vece od min");
+                return false;
             }
             else
             {
-                e.Cancel = false;
-                errorProvider.SetError(txtBoxMax, null);
+                errorStandardValue.SetError(txtBoxMin, null);
+                return true;
             }
         }
 
@@ -77,5 +81,6 @@ namespace LabV2OOP
         {
             this.Close();
         }
+
     }
 }

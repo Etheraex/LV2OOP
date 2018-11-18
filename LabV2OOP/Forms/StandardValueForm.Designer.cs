@@ -35,8 +35,8 @@
             this.txtBoxMax = new System.Windows.Forms.TextBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.errorStandardValue = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorStandardValue)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -63,7 +63,6 @@
             this.txtBoxMin.Name = "txtBoxMin";
             this.txtBoxMin.Size = new System.Drawing.Size(100, 20);
             this.txtBoxMin.TabIndex = 2;
-            this.txtBoxMin.Validating += new System.ComponentModel.CancelEventHandler(this.txtBoxMin_Validating);
             // 
             // txtBoxMax
             // 
@@ -71,7 +70,6 @@
             this.txtBoxMax.Name = "txtBoxMax";
             this.txtBoxMax.Size = new System.Drawing.Size(100, 20);
             this.txtBoxMax.TabIndex = 3;
-            this.txtBoxMax.Validating += new System.ComponentModel.CancelEventHandler(this.txtBoxMax_Validating);
             // 
             // btnOK
             // 
@@ -93,10 +91,10 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // errorProvider
+            // errorStandardValue
             // 
-            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider.ContainerControl = this;
+            this.errorStandardValue.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorStandardValue.ContainerControl = this;
             // 
             // StandardValueForm
             // 
@@ -111,7 +109,7 @@
             this.Controls.Add(this.label1);
             this.Name = "StandardValueForm";
             this.Text = "StandardValueForm";
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorStandardValue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,6 +123,6 @@
         private System.Windows.Forms.TextBox txtBoxMax;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider errorStandardValue;
     }
 }

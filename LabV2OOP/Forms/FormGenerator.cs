@@ -19,11 +19,11 @@ namespace LabV2OOP
         {
             InitializeComponent();
             LocalParent = parent;
-            if (!TemperatureValidator.TemperatureInstance.ValuesSet())
+            if (!TemperatureChecker.TemperatureInstance.ValuesSet())
                 txtBoxTemp.Enabled = false;
-            if (!PressureValidator.PressureInstance.ValuesSet())
+            if (!PressureChecker.PressureInstance.ValuesSet())
                 txtBoxPressure.Enabled = false;
-            if (!HumidityValidator.HumidityInstance.ValuesSet())
+            if (!HumidityChecker.HumidityInstance.ValuesSet())
                 txtBoxHumidity.Enabled = false;
             txtBoxInterval.Enabled = false;
         }
@@ -32,7 +32,7 @@ namespace LabV2OOP
 
         #region OtherFormsInit
 
-        private DialogResult CreateStandardValueForm(IValidate val, String text)
+        private DialogResult CreateStandardValueForm(ICheckStandard val, String text)
         {
             StandardValueForm stf = new StandardValueForm(val, text);
             return stf.ShowDialog();
@@ -40,23 +40,32 @@ namespace LabV2OOP
 
         private void btnPressure_Click(object sender, EventArgs e)
         {
-            DialogResult dr = CreateStandardValueForm(PressureValidator.PressureInstance, "Standardne vrednosti pritiska");
+            DialogResult dr = CreateStandardValueForm(PressureChecker.PressureInstance, "Standardne vrednosti pritiska");
             if (dr == DialogResult.OK)
-                txtBoxPressure.Enabled = true;
+            {
+                LocalParent.EnablePressureTextBoxes();
+                LocalParent.UpdateStandardValues();
+            }
         }
 
         private void btnTemperature_Click(object sender, EventArgs e)
         {
-            DialogResult dr = CreateStandardValueForm(TemperatureValidator.TemperatureInstance, "Standardne vrednosti temperature");
+            DialogResult dr = CreateStandardValueForm(TemperatureChecker.TemperatureInstance, "Standardne vrednosti temperature");
             if (dr == DialogResult.OK)
-                txtBoxTemp.Enabled = true;
+            {
+                LocalParent.EnableTemperatureTextBoxes();
+                LocalParent.UpdateStandardValues();
+            }
         }
 
         private void btnHumidity_Click(object sender, EventArgs e)
         {
-            DialogResult dr = CreateStandardValueForm(HumidityValidator.HumidityInstance, "Standardne vrednosti vlaznosti");
+            DialogResult dr = CreateStandardValueForm(HumidityChecker.HumidityInstance, "Standardne vrednosti vlaznosti");
             if (dr == DialogResult.OK)
-                txtBoxHumidity.Enabled = true;
+            {
+                LocalParent.EnableHumidityTextBoxes();
+                LocalParent.UpdateStandardValues();
+            }
         }
 
         #endregion
@@ -71,19 +80,19 @@ namespace LabV2OOP
             bool chkBox = chkBoxGranice.Checked;
             if (ValidateTemperature())
             {
-                if (txtBoxTemp.Text != "" && (chkBox || TemperatureValidator.TemperatureInstance.Validate(double.Parse(txtBoxTemp.Text))))
+                if (txtBoxTemp.Text != "" && (chkBox || TemperatureChecker.TemperatureInstance.Check(double.Parse(txtBoxTemp.Text))))
                     LocalParent.SendTemperatureChange(double.Parse(txtBoxTemp.Text));
             }
 
             if (ValidatePressure())
             {
-                if (txtBoxPressure.Text != "" && (chkBox || PressureValidator.PressureInstance.Validate(double.Parse(txtBoxPressure.Text))))
+                if (txtBoxPressure.Text != "" && (chkBox || PressureChecker.PressureInstance.Check(double.Parse(txtBoxPressure.Text))))
                     LocalParent.SendPressureChange(double.Parse(txtBoxPressure.Text));
             }
 
             if (ValidateHumidity())
             {
-                if (txtBoxHumidity.Text != "" && (chkBox || HumidityValidator.HumidityInstance.Validate(double.Parse(txtBoxHumidity.Text))))
+                if (txtBoxHumidity.Text != "" && (chkBox || HumidityChecker.HumidityInstance.Check(double.Parse(txtBoxHumidity.Text))))
                     LocalParent.SendHumidityChange(double.Parse(txtBoxHumidity.Text));
             }
         }
@@ -95,7 +104,12 @@ namespace LabV2OOP
         public bool ValidateHumidity()
         {
             double tmp;
-            if (String.IsNullOrEmpty(txtBoxHumidity.Text))
+            if (!txtBoxHumidity.Enabled)
+            {
+                errorProvider.SetError(txtBoxHumidity, null);
+                return false;
+            }
+            else if (String.IsNullOrEmpty(txtBoxHumidity.Text))
             {
                 errorProvider.SetError(txtBoxHumidity, "Unesite vlaznost");
                 return false;
@@ -115,7 +129,12 @@ namespace LabV2OOP
         public bool ValidatePressure()
         {
             double tmp;
-            if (String.IsNullOrEmpty(txtBoxPressure.Text))
+            if (!txtBoxPressure.Enabled)
+            {
+                errorProvider.SetError(txtBoxPressure, null);
+                return false;
+            }
+            else if (String.IsNullOrEmpty(txtBoxPressure.Text))
             {
                 errorProvider.SetError(txtBoxPressure, "Unesite Pressure");
                 return false;
@@ -135,7 +154,12 @@ namespace LabV2OOP
         public bool ValidateTemperature()
         {
             double tmp;
-            if (String.IsNullOrEmpty(txtBoxTemp.Text))
+            if (!txtBoxTemp.Enabled)
+            {
+                errorProvider.SetError(txtBoxTemp, null);
+                return false;
+            }
+            else if (String.IsNullOrEmpty(txtBoxTemp.Text))
             {
                 errorProvider.SetError(txtBoxTemp, "Unesite Temperature");
                 return false;
@@ -209,6 +233,21 @@ namespace LabV2OOP
         private void timer_Tick(object sender, EventArgs e)
         {
             Prosledi();
+        }
+
+        public void EnableTextBoxPressure()
+        {
+            txtBoxPressure.Enabled = true;
+        }
+
+        public void EnableTextBoxTemperature()
+        {
+            txtBoxTemp.Enabled = true;
+        }
+
+        public void EnableTextBoxHumidity()
+        {
+            txtBoxHumidity.Enabled = true;
         }
     }
 }

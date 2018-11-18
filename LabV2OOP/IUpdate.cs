@@ -11,5 +11,6 @@ namespace LabV2OOP
         void UpdateTemperature(double temp);
         void UpdatePressure(double press);
         void UpdateHumidity(double humid);
+        void UpdateStandardValues();
     }
 }

@@ -30,9 +30,9 @@ namespace LabV2OOP
             double avgPres = CalculateAverage(acceptedPres);
             double avgHumid = CalculateAverage(acceptedHumid);
 
-            lblTemp.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}",avgTemp, TemperatureValidator.TemperatureInstance.MinTemp, TemperatureValidator.TemperatureInstance.MaxTemp);
-            lblPres.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}", avgPres, PressureValidator.PressureInstance.MinPressure, PressureValidator.PressureInstance.MaxPressure);
-            lblHumid.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}", avgHumid, HumidityValidator.HumidityInstance.MinHumidity, HumidityValidator.HumidityInstance.MaxHumidity);
+            lblTemp.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}",avgTemp, TemperatureChecker.TemperatureInstance.MinTemp, TemperatureChecker.TemperatureInstance.MaxTemp);
+            lblPres.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}", avgPres, PressureChecker.PressureInstance.MinPressure, PressureChecker.PressureInstance.MaxPressure);
+            lblHumid.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}", avgHumid, HumidityChecker.HumidityInstance.MinHumidity, HumidityChecker.HumidityInstance.MaxHumidity);
         }
 
         private double CalculateAverage(List<double> values)
@@ -54,7 +54,7 @@ namespace LabV2OOP
 
         public void UpdateTemperature(double temp)
         {
-            if (TemperatureValidator.TemperatureInstance.Validate(temp))
+            if (TemperatureChecker.TemperatureInstance.Check(temp))
             {
                 txtBoxTemp.Text = temp.ToString();
                 acceptedTemp.Add(temp);
@@ -64,7 +64,7 @@ namespace LabV2OOP
 
         public void UpdatePressure(double press)
         {
-            if (PressureValidator.PressureInstance.Validate(press))
+            if (PressureChecker.PressureInstance.Check(press))
             {
                 txtBoxPress.Text = press.ToString();
                 acceptedPres.Add(press);
@@ -74,7 +74,7 @@ namespace LabV2OOP
 
         public void UpdateHumidity(double humid)
         {
-            if (HumidityValidator.HumidityInstance.Validate(humid))
+            if (HumidityChecker.HumidityInstance.Check(humid))
             {
                 txtBoxMoist.Text = humid.ToString();
                 acceptedHumid.Add(humid);
@@ -109,6 +109,12 @@ namespace LabV2OOP
                 errorStats.SetError(lblVrednost, null);
                 return true;
             }
+        }
+
+
+        public void UpdateStandardValues()
+        {
+            RefreshLabels();
         }
 
     }

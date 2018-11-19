@@ -85,7 +85,6 @@ namespace LabV2OOP
         {
             FormStatisticalData fsd = new FormStatisticalData();
             fsd.MdiParent = this;
-            fsd.UpdateStandardValues();
             fsd.Show();
         }
 

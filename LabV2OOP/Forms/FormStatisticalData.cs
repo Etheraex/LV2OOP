@@ -22,34 +22,94 @@ namespace LabV2OOP
             InitializeComponent();
             chkBoxStats.Checked = false;
             txtBoxStats.Enabled = false;
+            RefreshLabels();
         }
 
         private void RefreshLabels()
         {
-            double avgTemp = CalculateAverage(acceptedTemp);
-            double avgPres = CalculateAverage(acceptedPres);
-            double avgHumid = CalculateAverage(acceptedHumid);
+            CheckArrays();
+            lblTemp.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}", CalculateAverage(acceptedTemp), findMin(acceptedTemp), findMax(acceptedTemp));
+            lblPres.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}", CalculateAverage(acceptedPres), findMin(acceptedPres), findMax(acceptedPres));
+            lblHumid.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}", CalculateAverage(acceptedHumid), findMin(acceptedHumid), findMax(acceptedHumid));
+        }
 
-            lblTemp.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}",avgTemp, TemperatureChecker.TemperatureInstance.MinTemp, TemperatureChecker.TemperatureInstance.MaxTemp);
-            lblPres.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}", avgPres, PressureChecker.PressureInstance.MinPressure, PressureChecker.PressureInstance.MaxPressure);
-            lblHumid.Text = String.Format("Avg: {0:0.00} Min: {1:0.00} Max: {2:0.00}", avgHumid, HumidityChecker.HumidityInstance.MinHumidity, HumidityChecker.HumidityInstance.MaxHumidity);
+        private void CheckArrays()
+        {
+            for (int i = 0; i < acceptedTemp.Count(); i++)
+                if (!TemperatureChecker.TemperatureInstance.Check(acceptedTemp[i]))
+                {
+                    acceptedTemp.RemoveAt(i);
+                    i--;
+                }
+            for (int i = 0; i < acceptedPres.Count(); i++)
+                if (!PressureChecker.PressureInstance.Check(acceptedPres[i]))
+                {
+                    acceptedPres.RemoveAt(i);
+                    i--;
+                }
+            for (int i = 0; i < acceptedHumid.Count(); i++)
+                if (!HumidityChecker.HumidityInstance.Check(acceptedHumid[i]))
+                {
+                    acceptedHumid.RemoveAt(i);
+                    i--;
+                }
         }
 
         private double CalculateAverage(List<double> values)
         {
-            int i = 0;
-            int divisor = values.Count;
-            if (chkBoxStats.Checked && values.Count > int.Parse(txtBoxStats.Text))
+            if (values.Any())
             {
-                i = values.Count - int.Parse(txtBoxStats.Text);
-                divisor = int.Parse(txtBoxStats.Text);
+                int i = 0;
+                int divisor = values.Count;
+                if (chkBoxStats.Checked && values.Count > int.Parse(txtBoxStats.Text))
+                {
+                    i = values.Count - int.Parse(txtBoxStats.Text);
+                    divisor = int.Parse(txtBoxStats.Text);
+                }
+
+                double sum = 0;
+
+                for (; i < values.Count; i++)
+                    sum += values[i];
+                return sum / divisor;
             }
+            return 0.00;
+        }
 
-            double sum = 0;
+        private double findMin(List<double> values)
+        {
+            if (values.Any())
+            {
+                int i = 0;
+                if (chkBoxStats.Checked && values.Count > int.Parse(txtBoxStats.Text))
+                    i = values.Count() - int.Parse(txtBoxStats.Text);
+                double min = values[i];
+                for (; i < values.Count; i++)
+                {
+                    if (min > values[i])
+                        min = values[i];
+                }
+                return min;
+            }
+            return 0.00;
+        }
 
-            for(; i<values.Count; i++)
-                sum += values[i];
-            return sum / divisor;
+        private double findMax(List<double> values)
+        {
+            if (values.Any())
+            {
+                int i = 0;
+                if (chkBoxStats.Checked && values.Count > int.Parse(txtBoxStats.Text))
+                    i = values.Count() - int.Parse(txtBoxStats.Text);
+                double max = values[i];
+                for (; i < values.Count; i++)
+                {
+                    if (max < values[i])
+                        max = values[i];
+                }
+                return max;
+            }
+            return 0.00;
         }
 
         public void UpdateTemperature(double temp)
@@ -91,7 +151,11 @@ namespace LabV2OOP
         private void chkBoxStats_CheckedChanged(object sender, EventArgs e)
         {
             if (chkBoxStats.Checked == false)
+            {
                 RefreshLabels();
+                txtBoxStats.Enabled = false;
+                txtBoxStats.Text = "";
+            }
             else
                 txtBoxStats.Enabled = true;
         }

@@ -47,10 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormN.cs">
+    <Compile Include="Forms\FormN.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormN.Designer.cs">
+    <Compile Include="Forms\FormN.Designer.cs">
       <DependentUpon>FormN.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormChart.cs">
@@ -93,7 +93,7 @@
     <Compile Include="Forms\StandardValueForm.Designer.cs">
       <DependentUpon>StandardValueForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormN.resx">
+    <EmbeddedResource Include="Forms\FormN.resx">
       <DependentUpon>FormN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormChart.resx">

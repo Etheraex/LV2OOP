@@ -17,55 +17,15 @@ namespace LabV2OOP
             InitializeComponent();
         }
 
-        #region Changes
-
-        public void UpdateStandardValues()
+        public void SendChanges(double temperature, double pressure, double humidity)
         {
             foreach(Form f in MdiChildren)
             {
                 IUpdate upd = f as IUpdate;
-                if (upd != null)
-                    upd.UpdateStandardValues();
+                if(upd != null)
+                    upd.Update(temperature, pressure,humidity);
             }
         }
-
-        public void SendTemperatureChange(double par)
-        {
-            foreach (Form f in MdiChildren)
-            {
-                IUpdate upd = f as IUpdate;
-                if (upd != null)
-                {
-                    upd.UpdateTemperature(par);
-                }
-            }
-        }
-
-        public void SendPressureChange(double par)
-        {
-            foreach (Form f in MdiChildren)
-            {
-                IUpdate upd = f as IUpdate;
-                if (upd != null)
-                {
-                    upd.UpdatePressure(par);
-                }
-            }
-        }
-
-        public void SendHumidityChange(double par)
-        {
-            foreach (Form f in MdiChildren)
-            {
-                IUpdate upd = f as IUpdate;
-                if (upd != null)
-                {
-                    upd.UpdateHumidity(par);
-                }
-            }
-        }
-
-        #endregion
 
         private void mmFormGenerator_Click(object sender, EventArgs e)
         {
@@ -74,11 +34,12 @@ namespace LabV2OOP
             fm.Show();
         }
 
-        private void mmFormChart_Click(object sender, EventArgs e)
+        private void CreateChart(String type)
         {
-            FormChart fc = new FormChart();
-            fc.MdiParent = this;
-            fc.Show();
+            FormN fn = new FormN(type);
+            fn.MdiParent = this;
+            fn.LocalParent = this;
+            fn.Show();
         }
 
         private void mmFormStatisticalData_Click(object sender, EventArgs e)
@@ -116,7 +77,21 @@ namespace LabV2OOP
                 if(fg != null)
                     fg.EnableTextBoxHumidity();
             }
-        } 
+        }
 
+        private void formChartTemperatureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateChart("Temperature");
+        }
+
+        private void formChartPressureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateChart("Pressure");
+        }
+
+        private void formChartHumidityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateChart("Humidity");
+        }
     }
 }

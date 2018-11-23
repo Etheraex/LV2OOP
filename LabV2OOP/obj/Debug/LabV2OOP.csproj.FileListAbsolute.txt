@@ -12,3 +12,5 @@ C:\Users\Mladen\source\repos\LabV2OOP\LabV2OOP\obj\Debug\LabV2OOP.FormGenerator.
 C:\Users\Mladen\source\repos\LabV2OOP\LabV2OOP\obj\Debug\LabV2OOP.FormChart.resources
 C:\Users\Mladen\source\repos\LabV2OOP\LabV2OOP\obj\Debug\LabV2OOP.FormStatisticalData.resources
 C:\Users\Mladen\source\repos\LabV2OOP\LabV2OOP\obj\Debug\LabV2OOP.StandardValueForm.resources
+C:\Users\Mladen\source\repos\LabV2OOP\LabV2OOP\obj\Debug\LabV2OOP.ListForm.resources
+C:\Users\Mladen\source\repos\LabV2OOP\LabV2OOP\obj\Debug\LabV2OOP.FormN.resources

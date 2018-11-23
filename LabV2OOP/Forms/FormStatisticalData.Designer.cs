@@ -134,7 +134,7 @@
             // lblTemp
             // 
             this.lblTemp.AutoSize = true;
-            this.lblTemp.Location = new System.Drawing.Point(336, 45);
+            this.lblTemp.Location = new System.Drawing.Point(345, 33);
             this.lblTemp.Name = "lblTemp";
             this.lblTemp.Size = new System.Drawing.Size(35, 13);
             this.lblTemp.TabIndex = 17;
@@ -143,7 +143,7 @@
             // lblPres
             // 
             this.lblPres.AutoSize = true;
-            this.lblPres.Location = new System.Drawing.Point(345, 74);
+            this.lblPres.Location = new System.Drawing.Point(345, 73);
             this.lblPres.Name = "lblPres";
             this.lblPres.Size = new System.Drawing.Size(35, 13);
             this.lblPres.TabIndex = 18;
@@ -152,7 +152,7 @@
             // lblHumid
             // 
             this.lblHumid.AutoSize = true;
-            this.lblHumid.Location = new System.Drawing.Point(345, 113);
+            this.lblHumid.Location = new System.Drawing.Point(345, 115);
             this.lblHumid.Name = "lblHumid";
             this.lblHumid.Size = new System.Drawing.Size(35, 13);
             this.lblHumid.TabIndex = 19;

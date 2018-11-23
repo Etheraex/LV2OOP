@@ -8,9 +8,6 @@ namespace LabV2OOP
 {
     interface IUpdate
     {
-        void UpdateTemperature(double temp);
-        void UpdatePressure(double press);
-        void UpdateHumidity(double humid);
-        void UpdateStandardValues();
+        void Update(double temperature, double pressure,double humidity);
     }
 }

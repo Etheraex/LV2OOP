@@ -44,7 +44,7 @@ namespace LabV2OOP
             if (dr == DialogResult.OK)
             {
                 LocalParent.EnablePressureTextBoxes();
-                LocalParent.UpdateStandardValues();
+                LocalParent.SendChanges(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity);
             }
         }
 
@@ -54,7 +54,7 @@ namespace LabV2OOP
             if (dr == DialogResult.OK)
             {
                 LocalParent.EnableTemperatureTextBoxes();
-                LocalParent.UpdateStandardValues();
+                LocalParent.SendChanges(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity);
             }
         }
 
@@ -64,7 +64,7 @@ namespace LabV2OOP
             if (dr == DialogResult.OK)
             {
                 LocalParent.EnableHumidityTextBoxes();
-                LocalParent.UpdateStandardValues();
+                LocalParent.SendChanges(double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity);
             }
         }
 
@@ -77,24 +77,29 @@ namespace LabV2OOP
 
         private void Prosledi()
         {
+            double temperature = double.NegativeInfinity;
+            double pressure = double.NegativeInfinity;
+            double humidity = double.NegativeInfinity;
+            
             bool chkBox = chkBoxGranice.Checked;
             if (ValidateTemperature())
             {
                 if (txtBoxTemp.Text != "" && (chkBox || TemperatureChecker.TemperatureInstance.Check(double.Parse(txtBoxTemp.Text))))
-                    LocalParent.SendTemperatureChange(double.Parse(txtBoxTemp.Text));
+                    temperature = double.Parse(txtBoxTemp.Text);
             }
 
             if (ValidatePressure())
             {
                 if (txtBoxPressure.Text != "" && (chkBox || PressureChecker.PressureInstance.Check(double.Parse(txtBoxPressure.Text))))
-                    LocalParent.SendPressureChange(double.Parse(txtBoxPressure.Text));
+                    pressure = double.Parse(txtBoxPressure.Text);
             }
 
             if (ValidateHumidity())
             {
                 if (txtBoxHumidity.Text != "" && (chkBox || HumidityChecker.HumidityInstance.Check(double.Parse(txtBoxHumidity.Text))))
-                    LocalParent.SendHumidityChange(double.Parse(txtBoxHumidity.Text));
+                    humidity = double.Parse(txtBoxHumidity.Text);
             }
+            LocalParent.SendChanges(temperature, pressure, humidity);
         }
 
         public MainForm LocalParent { get; set; }
@@ -136,12 +141,12 @@ namespace LabV2OOP
             }
             else if (String.IsNullOrEmpty(txtBoxPressure.Text))
             {
-                errorProvider.SetError(txtBoxPressure, "Unesite Pressure");
+                errorProvider.SetError(txtBoxPressure, "Unesite pritisak");
                 return false;
             }
             else if (!double.TryParse(txtBoxPressure.Text, out tmp))
             {
-                errorProvider.SetError(txtBoxPressure, "Unesite Pressure pravilno");
+                errorProvider.SetError(txtBoxPressure, "Unesite pritisak pravilno");
                 return false;
             }
             else
@@ -161,12 +166,12 @@ namespace LabV2OOP
             }
             else if (String.IsNullOrEmpty(txtBoxTemp.Text))
             {
-                errorProvider.SetError(txtBoxTemp, "Unesite Temperature");
+                errorProvider.SetError(txtBoxTemp, "Unesite temperaturu");
                 return false;
             }
             else if (!double.TryParse(txtBoxTemp.Text, out tmp))
             {
-                errorProvider.SetError(txtBoxTemp, "Unesite Temperature pravilno");
+                errorProvider.SetError(txtBoxTemp, "Unesite temperaturu pravilno");
                 return false;
             }
             else

@@ -112,36 +112,6 @@ namespace LabV2OOP
             return 0.00;
         }
 
-        public void UpdateTemperature(double temp)
-        {
-            if (TemperatureChecker.TemperatureInstance.Check(temp))
-            {
-                txtBoxTemp.Text = temp.ToString();
-                acceptedTemp.Add(temp);
-                RefreshLabels();
-            }
-        }
-
-        public void UpdatePressure(double press)
-        {
-            if (PressureChecker.PressureInstance.Check(press))
-            {
-                txtBoxPress.Text = press.ToString();
-                acceptedPres.Add(press);
-                RefreshLabels();
-            }
-        }
-
-        public void UpdateHumidity(double humid)
-        {
-            if (HumidityChecker.HumidityInstance.Check(humid))
-            {
-                txtBoxMoist.Text = humid.ToString();
-                acceptedHumid.Add(humid);
-                RefreshLabels();
-            }
-        }
-
         private void txtBoxStats_TextChanged(object sender, EventArgs e)
         {
             if(ValidateStatCount())
@@ -155,6 +125,7 @@ namespace LabV2OOP
                 RefreshLabels();
                 txtBoxStats.Enabled = false;
                 txtBoxStats.Text = "";
+                errorStats.SetError(lblVrednost, null);
             }
             else
                 txtBoxStats.Enabled = true;
@@ -175,11 +146,26 @@ namespace LabV2OOP
             }
         }
 
-
-        public void UpdateStandardValues()
+        public void Update(double temperature, double pressure, double humidity)
         {
+            if (TemperatureChecker.TemperatureInstance.Check(temperature))
+            {
+                txtBoxTemp.Text = temperature.ToString();
+                acceptedTemp.Add(temperature);
+            }
+
+            if (PressureChecker.PressureInstance.Check(pressure))
+            {
+                txtBoxPress.Text = pressure.ToString();
+                acceptedPres.Add(pressure);
+            }
+
+            if (HumidityChecker.HumidityInstance.Check(humidity))
+            {
+                txtBoxMoist.Text = humidity.ToString();
+                acceptedHumid.Add(humidity);
+            }
             RefreshLabels();
         }
-
     }
 }

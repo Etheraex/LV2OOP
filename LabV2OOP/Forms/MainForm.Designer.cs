@@ -33,6 +33,9 @@
             this.mmFormGenerator = new System.Windows.Forms.ToolStripMenuItem();
             this.mmFormChart = new System.Windows.Forms.ToolStripMenuItem();
             this.mmFormStatisticalData = new System.Windows.Forms.ToolStripMenuItem();
+            this.formChartTemperatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formChartPressureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formChartHumidityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,10 +68,13 @@
             // 
             // mmFormChart
             // 
+            this.mmFormChart.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formChartTemperatureToolStripMenuItem,
+            this.formChartPressureToolStripMenuItem,
+            this.formChartHumidityToolStripMenuItem});
             this.mmFormChart.Name = "mmFormChart";
             this.mmFormChart.Size = new System.Drawing.Size(180, 22);
             this.mmFormChart.Text = "FormChart";
-            this.mmFormChart.Click += new System.EventHandler(this.mmFormChart_Click);
             // 
             // mmFormStatisticalData
             // 
@@ -76,6 +82,27 @@
             this.mmFormStatisticalData.Size = new System.Drawing.Size(180, 22);
             this.mmFormStatisticalData.Text = "FormStatisticalData";
             this.mmFormStatisticalData.Click += new System.EventHandler(this.mmFormStatisticalData_Click);
+            // 
+            // formChartTemperatureToolStripMenuItem
+            // 
+            this.formChartTemperatureToolStripMenuItem.Name = "formChartTemperatureToolStripMenuItem";
+            this.formChartTemperatureToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.formChartTemperatureToolStripMenuItem.Text = "FormChart Temperature";
+            this.formChartTemperatureToolStripMenuItem.Click += new System.EventHandler(this.formChartTemperatureToolStripMenuItem_Click);
+            // 
+            // formChartPressureToolStripMenuItem
+            // 
+            this.formChartPressureToolStripMenuItem.Name = "formChartPressureToolStripMenuItem";
+            this.formChartPressureToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.formChartPressureToolStripMenuItem.Text = "FormChart Pressure";
+            this.formChartPressureToolStripMenuItem.Click += new System.EventHandler(this.formChartPressureToolStripMenuItem_Click);
+            // 
+            // formChartHumidityToolStripMenuItem
+            // 
+            this.formChartHumidityToolStripMenuItem.Name = "formChartHumidityToolStripMenuItem";
+            this.formChartHumidityToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.formChartHumidityToolStripMenuItem.Text = "FormChart Pressure";
+            this.formChartHumidityToolStripMenuItem.Click += new System.EventHandler(this.formChartHumidityToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -100,6 +127,9 @@
         private System.Windows.Forms.ToolStripMenuItem mmFormChart;
         private System.Windows.Forms.ToolStripMenuItem mmFormStatisticalData;
         private System.Windows.Forms.MenuStrip mainMenu;
+        private System.Windows.Forms.ToolStripMenuItem formChartTemperatureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formChartPressureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formChartHumidityToolStripMenuItem;
     }
 }
 
